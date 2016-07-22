@@ -4,5 +4,7 @@ using System.Collections;
 public interface IBossClass{
 
 	void Attack();
+
+    float getHP();
 	
 }
