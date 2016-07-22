@@ -4,6 +4,10 @@ using System.Collections;
 public class WallSquare : MonoBehaviour {
     public Vector2 correctPosition;//posizione corretta per ogni quadrato per comporre il muro
 
+    public Vector2 delta;
+
+    public Transform boss;
+
     public float speed = 2;
     // Use this for initialization
     void Start () {
@@ -24,12 +28,12 @@ public class WallSquare : MonoBehaviour {
         {
             transform.position = Vector2.Lerp(transform.position, correctPosition, Time.deltaTime * speed);
             yield return new WaitForEndOfFrame();
+            correctPosition = (Vector2)boss.position - delta;
         }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        print("Cavallo pazzo");
         if (coll.gameObject.GetComponent<Bullet>())
         {
             Destroy(coll.gameObject);

@@ -11,12 +11,15 @@ public class WallSquareFactory : MonoBehaviour {
 	void Start () {
         wallSquares = GetComponentsInChildren<WallSquare>();
         int i = 0;
-        foreach(WallSquare square in wallSquares)
+        bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
+        foreach (WallSquare square in wallSquares)
         {
             square.correctPosition = square.transform.position;//salvo la posizione corretta per ogni quadrato
+            square.delta = square.transform.position - bossTransform.position;
+            square.boss = bossTransform;
             square.transform.position = hiddenPosition+new Vector2(i++*30,0);
         }
-        bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
+        
         StartCoroutine(CleanArray());
 	}
 	

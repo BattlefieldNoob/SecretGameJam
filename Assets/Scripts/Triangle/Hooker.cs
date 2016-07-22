@@ -9,21 +9,24 @@ public class Hooker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButton(0) || Input.GetButton("Fire2"))
+        if (Time.timeScale > 0)
         {
-            if(direction==Vector2.zero)
-                direction = GameObject.Find("Crosshair").transform.position - transform.position;
-            if (hookInstance == null)
-                hookInstance = (GameObject)Instantiate(Resources.Load("Hook"),transform.position,Quaternion.identity); 
-            if(!hookInstance.GetComponent<Hook>().hooked)
-                hookInstance.GetComponent<Rigidbody2D>().velocity = direction.normalized * Time.deltaTime * speed;
-            hookInstance.GetComponent<Hook>().player = transform.parent.gameObject; 
-        }
-        else
-        {
-            if(hookInstance!=null)
-                Destroy(hookInstance);
-            direction = Vector2.zero; 
+            if (Input.GetMouseButton(0) || Input.GetButton("Fire2"))
+            {
+                if (direction == Vector2.zero)
+                    direction = GameObject.Find("Crosshair").transform.position - transform.position;
+                if (hookInstance == null)
+                    hookInstance = (GameObject)Instantiate(Resources.Load("Hook"), transform.position, Quaternion.identity);
+                if (!hookInstance.GetComponent<Hook>().hooked)
+                    hookInstance.GetComponent<Rigidbody2D>().velocity = direction.normalized * Time.deltaTime * speed;
+                hookInstance.GetComponent<Hook>().player = transform.parent.gameObject;
+            }
+            else
+            {
+                if (hookInstance != null)
+                    Destroy(hookInstance);
+                direction = Vector2.zero;
+            }
         }
 
 	}
