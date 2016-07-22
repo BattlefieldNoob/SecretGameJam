@@ -6,7 +6,7 @@ public class TriangleClass : MonoBehaviour, IPlayerClass {
 
     void IPlayerClass.Attack1()
     {
-        print("Triangle Class Attack1");
+        print("Triangle attack 1");
     }
 
     void IPlayerClass.Attack2()

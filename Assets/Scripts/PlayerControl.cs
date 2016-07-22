@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour {
     int nextState = 0; 
     public GameObject[] forms; 
 
+	
+
 	// Use this for initialization
 	void Start () {
 		current=forms[0];
@@ -18,12 +20,10 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.F)){
+		if(Input.GetMouseButtonDown(0)){
 			current.SendMessage("Attack1");
-		}else if (Input.GetKeyDown(KeyCode.G)){
-            current.SendMessage("Attack2");
-        }
-        else if (Input.GetKeyDown(KeyCode.T)){
+		}
+        else if (Input.GetMouseButtonDown(1)){
             currentIndex = nextState;
 			//switch state 
 			nextState = currentIndex+1;

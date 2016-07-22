@@ -9,7 +9,7 @@ public class Hooker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetMouseButton(0))
         {
             if(direction==Vector2.zero)
                 direction = GameObject.Find("Crosshair").transform.position - transform.position;
