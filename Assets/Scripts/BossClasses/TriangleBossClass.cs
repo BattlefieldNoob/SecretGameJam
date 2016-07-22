@@ -9,7 +9,9 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     public float attackCooldown = 10f;
     GameObject player;
     public float speed;
-    public float hp = 100; 
+    public float hp = 100;
+    public bool enraged = false;
+    float maximum;
 
 
     public GameObject attaccoPunte;
@@ -19,6 +21,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         print("waiting for cooldown");
         player = GameObject.Find("Player");
+        maximum = hp;
     }
 
     // Update is called once per frame
@@ -46,6 +49,19 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         {
             Death();
         }
+
+        if (hp <= maximum * 0.35f && !enraged)
+            Enrage();
+
+    }
+
+    void Enrage()
+    {
+        print("ENRAGED!!!!"); 
+        enraged = true;
+        speed *= 1.5f;
+        attackCooldown = 6;
+        GetComponentInChildren<SpriteRenderer>().color = Color.red; 
     }
 
     void Death()
