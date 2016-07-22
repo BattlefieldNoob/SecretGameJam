@@ -52,4 +52,9 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         GetComponentInParent<BossAi>().SendMessage("SwitchClass");
     }
+
+    public float getHP()
+    {
+        return hp;
+    }
 }

@@ -9,7 +9,9 @@ public class BossAi : MonoBehaviour {
 
     Classes currentClass;
     public States currentState;
-    GameObject current; 
+    GameObject current;
+
+    public HealthBarScript healthBar;
 	// Use this for initialization
 	void Start () {
         //StartCoroutine(AIMovementLoop());
@@ -17,6 +19,7 @@ public class BossAi : MonoBehaviour {
         transform.GetChild(1).gameObject.SetActive(false);
         current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
+        healthBar.MaxValue = 100f;
     }
 
     void Update()
@@ -25,6 +28,7 @@ public class BossAi : MonoBehaviour {
         {
             SwitchClass();
         }
+        healthBar.Value = current.GetComponent<IBossClass>().getHP();
     }
 
     public void Damage()

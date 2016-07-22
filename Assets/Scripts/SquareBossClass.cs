@@ -14,6 +14,8 @@ public class SquareBossClass : MonoBehaviour,IBossClass {
     public GameObject attaccoCubi;
     public GameObject cubiDifesa;
 
+    public float hp = 100;
+
     // Use this for initialization
     void Start()
     {
@@ -55,5 +57,10 @@ public class SquareBossClass : MonoBehaviour,IBossClass {
                 Instantiate(cubiDifesa, boss.transform.position, Quaternion.identity);
             }
         }
+    }
+
+    public float getHP()
+    {
+        return hp;
     }
 }
