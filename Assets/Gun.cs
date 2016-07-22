@@ -10,11 +10,15 @@ public class Gun : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         counter += Time.deltaTime; 
-        if (Input.GetMouseButtonDown(0) && counter>=shootFrequency)
+        if (counter>=shootFrequency )
         {
-            counter = 0; 
-            GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"), gun.transform.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().dir = GameObject.Find("Crosshair").transform.position - transform.position;
+            print("wewe"); 
+            if (Input.GetMouseButtonDown(0) ||Input.GetButton("Fire3"))
+            {
+                counter = 0;
+                GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"), gun.transform.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().dir = GameObject.Find("Crosshair").transform.position - transform.position;
+            }
         }
 	}
 }
