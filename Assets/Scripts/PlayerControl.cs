@@ -4,34 +4,37 @@ using System.Collections.Generic;
 
 public class PlayerControl : MonoBehaviour {
 
-	List<IPlayerClass> classes=new List<IPlayerClass>();
+	GameObject current;
 
-	IPlayerClass current;
-
-	int currentIndex=0;
+	int currentIndex=-1;
+    int nextState = 0; 
+    public GameObject[] forms; 
 
 	// Use this for initialization
 	void Start () {
-		classes.Add(new TriangleClass());
-		classes.Add(new CircleClass());
-		current=classes[0];
+		current=forms[0];
+        current.SetActive(true);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.F)){
-			current.Attack1();
+			current.SendMessage("Attack1");
 		}else if (Input.GetKeyDown(KeyCode.G)){
-			current.Attack2();
-		}else if (Input.GetKeyDown(KeyCode.T)){
+            current.SendMessage("Attack2");
+        }
+        else if (Input.GetKeyDown(KeyCode.T)){
+            currentIndex = nextState;
 			//switch state 
-			int nextState = currentIndex+1;
+			nextState = currentIndex+1;
 			print(nextState);
-			currentIndex=nextState<classes.Count?nextState:0;
-			current = classes[currentIndex];
+            if (nextState == forms.Length)
+                nextState = 0; 
 			print("next Position:"+currentIndex);
-			//TODO: gestire la trasformazione della forma del personaggio
-			print("switched state");
+            forms[currentIndex].SetActive(false);
+            forms[nextState].SetActive(true);
+            current = forms[nextState];
+            print("switched state");
 		}
 	}
 }
