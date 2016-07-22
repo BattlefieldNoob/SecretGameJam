@@ -6,8 +6,7 @@ public class TriangleBossClass : MonoBehaviour,IBossClass {
 
 	float attackCooldownCounter=0;
 	public float attackCooldown=10f;
-
-	IBossClass[] classes;
+   
 
     public GameObject attaccoPunte;
 

@@ -3,19 +3,50 @@ using System.Collections;
 
 public class BossAi : MonoBehaviour {
 
-	IBossClass[] classes;
+    enum Classes { Square, Triangle };
 
-    Random rand = new Random();
+    public enum States { Free, Frozen }
 
-    IBossClass currentState;
+    Classes currentClass;
+    public States currentState;
 	// Use this for initialization
 	void Start () {
-		classes=GetComponentsInChildren<IBossClass>();
         StartCoroutine(AIMovementLoop());
-        //attivo in modo scriptato la classe "Tringolo"
-        transform.GetChild(0).gameObject.SetActive(false);
+        //attivo in modo scriptato la classe "Square"
         transform.GetChild(1).gameObject.SetActive(false);
-        currentState = classes[0];
+        currentClass = Classes.Square;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))//TODO:da rimuovere, ci pensa l'AI
+        {
+            SwitchClass();
+        }
+    }
+
+
+    void SwitchClass()
+    {
+        switch (currentClass)
+        {
+            case Classes.Square:
+                {
+                    //disattivo tutti, attivo la classe square
+                    transform.GetChild(1).gameObject.SetActive(false);
+                    transform.GetChild(0).gameObject.SetActive(true);
+                    currentClass = Classes.Triangle;
+                }
+                break;
+            case Classes.Triangle:
+                {
+                    //disattivo tutti, attivo la classe square
+                    transform.GetChild(1).gameObject.SetActive(true);
+                    transform.GetChild(0).gameObject.SetActive(false);
+                    currentClass = Classes.Square;
+                }
+                break;
+        }
     }
 
 
@@ -23,24 +54,31 @@ public class BossAi : MonoBehaviour {
     {
         while (true)//finchè non muoio
         {
-            print("Aspetto");
-            //aspetto un tempo random di secondi
-            yield return new WaitForSeconds(Random.Range(0.5f, 3f));
-            print("fine attesa");
-            //decido la direzione e la quantità di spostamento a random
-            float delta = Random.Range(-2f, 2f);
-            foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>()) {
-                sr.flipX = delta > 0 ? true : false;
-            }
-            //TODO: controllare che il boss non stia uscendo dalla sua zona
-            //mi sposto
-            Vector2 startPosition = transform.position;
-            while(Vector2.Distance(transform.position,startPosition+new Vector2(delta, 0)) > 0.5f)
+            if (currentState != States.Frozen)
             {
-                transform.position = Vector2.Lerp(transform.position, startPosition + new Vector2(delta, 0), Time.deltaTime * 2);
-                yield return new WaitForEndOfFrame();
+                print("Aspetto");
+                //aspetto un tempo random di secondi
+                yield return new WaitForSeconds(Random.Range(0.5f, 3f));
+                print("fine attesa");
+                //decido la direzione e la quantità di spostamento a random
+                float delta = Random.Range(-2f, 2f);
+                foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+                {
+                    sr.flipX = delta > 0 ? true : false;
+                }
+                //TODO: controllare che il boss non stia uscendo dalla sua zona
+                //mi sposto
+                Vector2 startPosition = transform.position;
+                while (Vector2.Distance(transform.position, startPosition + new Vector2(delta, 0)) > 0.5f)
+                {
+                    transform.position = Vector2.Lerp(transform.position, startPosition + new Vector2(delta, 0), Time.deltaTime * 2);
+                    yield return new WaitForEndOfFrame();
+                }
+                print("Fine spostamento");
+            }else
+            {
+                yield return new WaitForSeconds(4f);
             }
-            print("Fine spostamento");
         }
     }
 
