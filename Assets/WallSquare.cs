@@ -26,4 +26,14 @@ public class WallSquare : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        print("Cavallo pazzo");
+        if (coll.gameObject.GetComponent<Bullet>())
+        {
+            Destroy(coll.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }

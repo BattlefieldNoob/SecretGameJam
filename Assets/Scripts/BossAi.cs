@@ -33,16 +33,16 @@ public class BossAi : MonoBehaviour {
             case Classes.Square:
                 {
                     //disattivo tutti, attivo la classe square
-                    transform.GetChild(1).gameObject.SetActive(false);
-                    transform.GetChild(0).gameObject.SetActive(true);
+                    transform.GetChild(1).gameObject.SetActive(true);
+                    transform.GetChild(0).gameObject.SetActive(false);
                     currentClass = Classes.Triangle;
                 }
                 break;
             case Classes.Triangle:
                 {
                     //disattivo tutti, attivo la classe square
-                    transform.GetChild(1).gameObject.SetActive(true);
-                    transform.GetChild(0).gameObject.SetActive(false);
+                    transform.GetChild(1).gameObject.SetActive(false);
+                    transform.GetChild(0).gameObject.SetActive(true);
                     currentClass = Classes.Square;
                 }
                 break;
@@ -58,10 +58,10 @@ public class BossAi : MonoBehaviour {
             {
                 print("Aspetto");
                 //aspetto un tempo random di secondi
-                yield return new WaitForSeconds(Random.Range(0.5f, 3f));
+                yield return new WaitForSeconds(Random.Range(0.5f, 2f));
                 print("fine attesa");
                 //decido la direzione e la quantità di spostamento a random
-                float delta = Random.Range(-2f, 2f);
+                float delta = Random.Range(-2f, 2f) * 15;
                 foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
                 {
                     sr.flipX = delta > 0 ? true : false;
@@ -69,7 +69,7 @@ public class BossAi : MonoBehaviour {
                 //TODO: controllare che il boss non stia uscendo dalla sua zona
                 //mi sposto
                 Vector2 startPosition = transform.position;
-                while (Vector2.Distance(transform.position, startPosition + new Vector2(delta, 0)) > 0.5f)
+                while (Vector2.Distance(transform.position, startPosition + new Vector2(delta, 0)) > 1f)
                 {
                     transform.position = Vector2.Lerp(transform.position, startPosition + new Vector2(delta, 0), Time.deltaTime * 2);
                     yield return new WaitForEndOfFrame();

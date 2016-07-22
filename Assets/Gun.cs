@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour {
         counter += Time.deltaTime; 
         if (counter>=shootFrequency )
         {
-            print("wewe"); 
+         //   print("wewe"); 
             if (Input.GetMouseButton(1) ||Input.GetButton("Fire3"))
             {
                 counter = 0;

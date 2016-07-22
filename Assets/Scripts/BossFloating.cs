@@ -16,8 +16,11 @@ public class BossFloating : MonoBehaviour {
      actionPoint = Hit.transform.position + Hit.transform.TransformDirection(buoyancyCentreOffset);
      forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
      if(forceFactor > 0f){
-		 uplift = -Physics.gravity * (forceFactor - Hit.GetComponent<Rigidbody2D>().velocity.y * bounceDamp);
-         Hit.GetComponent<Rigidbody2D>().AddForceAtPosition(uplift, actionPoint);
+            if (Hit.GetComponent<Rigidbody2D>())
+            {
+                uplift = -Physics.gravity * (forceFactor - Hit.GetComponent<Rigidbody2D>().velocity.y * bounceDamp);
+                Hit.GetComponent<Rigidbody2D>().AddForceAtPosition(uplift, actionPoint);
+            }
      }
  }
 }
