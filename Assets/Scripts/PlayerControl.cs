@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour
         //}
 
         //triangle
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire2"))
         {
             if (current.name != "Triangle")
             {
@@ -56,7 +56,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("Fire3"))
         {
             if (current.name != "Circle")
             {

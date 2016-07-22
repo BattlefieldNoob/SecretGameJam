@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour {
         if (counter>=shootFrequency )
         {
             print("wewe"); 
-            if (Input.GetMouseButtonDown(0) ||Input.GetButton("Fire3"))
+            if (Input.GetMouseButton(1) ||Input.GetButton("Fire3"))
             {
                 counter = 0;
                 GameObject bullet = (GameObject)Instantiate(Resources.Load("Bullet"), gun.transform.position, Quaternion.identity);

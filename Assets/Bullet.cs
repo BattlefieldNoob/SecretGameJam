@@ -20,4 +20,10 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         transform.position += (Vector3)dir.normalized * Time.deltaTime * speed; 
 	}
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "WeakPoint")
+            coll.gameObject.SendMessage("Damage"); 
+    }
 }
