@@ -2,27 +2,35 @@
 using System.Collections;
 using System;
 
-public class TriangleBossClass : MonoBehaviour,IBossClass {
+public class TriangleBossClass : MonoBehaviour, IBossClass
+{
 
-	float attackCooldownCounter=0;
-	public float attackCooldown=10f;
-   
+    float attackCooldownCounter = 0;
+    public float attackCooldown = 10f;
+    GameObject player;
+    public float speed;
+
 
     public GameObject attaccoPunte;
 
-	// Use this for initialization
-	void Start () {
-		print("waiting for cooldown");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		attackCooldownCounter-=Time.deltaTime;
-		if(attackCooldownCounter<=0){
-			Attack();
-			attackCooldownCounter=attackCooldown;//reset cooldown counter
-		}
-	}
+    // Use this for initialization
+    void Start()
+    {
+        print("waiting for cooldown");
+        player = GameObject.Find("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
+        attackCooldownCounter -= Time.deltaTime;
+        if (attackCooldownCounter <= 0)
+        {
+            Attack();
+            attackCooldownCounter = attackCooldown;//reset cooldown counter
+        }
+    }
 
     public void Attack()
     {

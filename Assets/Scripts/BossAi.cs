@@ -11,7 +11,7 @@ public class BossAi : MonoBehaviour {
     public States currentState;
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(AIMovementLoop());
+        //StartCoroutine(AIMovementLoop());
         //attivo in modo scriptato la classe "Square"
         transform.GetChild(1).gameObject.SetActive(false);
         currentClass = Classes.Square;
