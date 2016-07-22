@@ -9,6 +9,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     public float attackCooldown = 10f;
     GameObject player;
     public float speed;
+    public float hp = 100; 
 
 
     public GameObject attaccoPunte;
@@ -36,5 +37,19 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         print("Attacco con le punte");
         Instantiate(attaccoPunte, Vector3.zero, Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+        hp--;
+        if (hp == 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        GetComponentInParent<BossAi>().SendMessage("SwitchClass");
     }
 }

@@ -9,11 +9,13 @@ public class BossAi : MonoBehaviour {
 
     Classes currentClass;
     public States currentState;
+    GameObject current; 
 	// Use this for initialization
 	void Start () {
         //StartCoroutine(AIMovementLoop());
         //attivo in modo scriptato la classe "Square"
         transform.GetChild(1).gameObject.SetActive(false);
+        current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
     }
 
@@ -23,6 +25,11 @@ public class BossAi : MonoBehaviour {
         {
             SwitchClass();
         }
+    }
+
+    public void Damage()
+    {
+        current.SendMessage("Damage");
     }
 
 
@@ -35,6 +42,7 @@ public class BossAi : MonoBehaviour {
                     //disattivo tutti, attivo la classe square
                     transform.GetChild(1).gameObject.SetActive(true);
                     transform.GetChild(0).gameObject.SetActive(false);
+                    current = transform.GetChild(1).gameObject;
                     currentClass = Classes.Triangle;
                 }
                 break;
@@ -43,6 +51,7 @@ public class BossAi : MonoBehaviour {
                     //disattivo tutti, attivo la classe square
                     transform.GetChild(1).gameObject.SetActive(false);
                     transform.GetChild(0).gameObject.SetActive(true);
+                    current = transform.GetChild(0).gameObject;
                     currentClass = Classes.Square;
                 }
                 break;

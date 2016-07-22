@@ -21,9 +21,10 @@ public class Bullet : MonoBehaviour {
         transform.position += (Vector3)dir.normalized * Time.deltaTime * speed; 
 	}
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag == "WeakPoint")
-            coll.gameObject.SendMessage("Damage"); 
+        if (coll.gameObject.tag == "Boss")
+            coll.gameObject.SendMessage("Damage");
+        Destroy(gameObject);
     }
 }
