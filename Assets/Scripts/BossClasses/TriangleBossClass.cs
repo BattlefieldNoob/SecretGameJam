@@ -9,6 +9,8 @@ public class TriangleBossClass : MonoBehaviour,IBossClass {
 
 	IBossClass[] classes;
 
+    public GameObject attaccoPunte;
+
 	// Use this for initialization
 	void Start () {
 		print("waiting for cooldown");
@@ -25,6 +27,7 @@ public class TriangleBossClass : MonoBehaviour,IBossClass {
 
     public void Attack()
     {
-        print("Show spuntoni");
+        print("Attacco con le punte");
+        Instantiate(attaccoPunte, Vector3.zero, Quaternion.identity);
     }
 }
