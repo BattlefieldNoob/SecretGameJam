@@ -31,6 +31,7 @@ public class SideSpike : MonoBehaviour {
 			}
 			TranslateSpikes();
 		}
+        Destroy(gameObject.transform.parent.gameObject);
 	}
 
 	void TranslateSpikes(){
