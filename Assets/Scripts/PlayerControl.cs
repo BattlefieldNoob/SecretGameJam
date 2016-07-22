@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour {
     int nextState = 0; 
     public GameObject[] forms; 
 
+	
+
 	// Use this for initialization
 	void Start () {
 		current=forms[0];

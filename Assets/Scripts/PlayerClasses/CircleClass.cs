@@ -3,9 +3,12 @@ using System.Collections;
 using System;
 
 public class CircleClass : MonoBehaviour,IPlayerClass {
+
+	
     public void Attack1()
     {
         print("Circle Class Attack1");
+		transform.Translate(new Vector2(1,30));
     }
 
     public void Attack2()
