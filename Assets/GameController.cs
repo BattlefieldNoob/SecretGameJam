@@ -47,4 +47,9 @@ public class GameController : MonoBehaviour {
             pauseCanvas.SetActive(false);
         }
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
