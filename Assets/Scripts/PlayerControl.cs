@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour {
 			current.SendMessage("Attack1");
 		}
         else if (Input.GetMouseButtonDown(1)){
+            Destroy(GameObject.Find("Hook(Clone)"));
             currentIndex = nextState;
 			//switch state 
 			nextState = currentIndex+1;

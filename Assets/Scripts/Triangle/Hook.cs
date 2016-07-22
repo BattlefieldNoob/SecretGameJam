@@ -16,9 +16,9 @@ public class Hook : MonoBehaviour {
         }
 	}
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.name == "Ceiling")
+        if (coll.gameObject.name == "Ceiling" || coll.gameObject.name.StartsWith("Floor"))
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             hooked = true;
