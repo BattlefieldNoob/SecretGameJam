@@ -8,7 +8,8 @@ public class PlayerControl : MonoBehaviour {
 
 	int currentIndex=-1;
     int nextState = 0; 
-    public GameObject[] forms; 
+    public GameObject[] forms;
+    public float speed; 
 
 	
 
@@ -20,10 +21,15 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(0)){
+
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(Input.GetAxis("Horizontal"), 0) * speed);
+
+		if(Input.GetMouseButtonDown(0) )
+        {
 			current.SendMessage("Attack1");
 		}
-        else if (Input.GetMouseButtonDown(1)){
+        else if (Input.GetMouseButtonDown(1) )
+        {
             Destroy(GameObject.Find("Hook(Clone)"));
             currentIndex = nextState;
 			//switch state 
