@@ -33,8 +33,7 @@ public class FakeTriangleBossClass : MonoBehaviour, IBossClass
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale != 0)
-        {
+        
             if (rising)
             {
                 transform.Translate(new Vector3(0, 1, 0) * risingSpeed);
@@ -60,7 +59,7 @@ public class FakeTriangleBossClass : MonoBehaviour, IBossClass
             {
                 GoDown();
             }
-        }
+        
     }
 
     public void Attack()
