@@ -51,7 +51,7 @@ public class PlayerLife : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Boss" || coll.gameObject.tag == "Pikes")
             if (!damaged)

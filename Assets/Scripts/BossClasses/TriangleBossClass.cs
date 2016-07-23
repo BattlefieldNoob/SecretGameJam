@@ -35,7 +35,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         if (rising)
         {
-            transform.Translate(new Vector3(0, 1, 0) * risingSpeed);
+            transform.parent.Translate(new Vector3(0, 1, 0) * risingSpeed);
             GameObject.FindGameObjectWithTag("MainCamera").SendMessage("StartShaking");
             if (Vector2.Distance(Vector2.zero, transform.position) < 3)
             {
@@ -108,10 +108,10 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         }
         if (sinking && !stopped)
         {
-            transform.Translate(new Vector3(0, -1, 0) * sinkingSpeed);
+            transform.parent.Translate(new Vector3(0, -1, 0) * sinkingSpeed);
             //transform.position = new Vector3( transform.position.x +  Mathf.Sin(Time.time * speed),transform.position.y,transform.position.z);
             //if (Vector2.Distance(transform.position, GameObject.Find("Paperella").transform.position) < 10)
-            if(transform.position.y <= GameObject.Find("Paperella").transform.position.y)
+            if(transform.parent.position.y <= GameObject.Find("Paperella").transform.position.y)
             {
                 stopped = true;
                 GetComponentInParent<BossAi>().SendMessage("PyramidDeath");
