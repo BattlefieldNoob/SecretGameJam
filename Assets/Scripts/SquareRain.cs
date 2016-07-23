@@ -9,7 +9,8 @@ public class SquareRain : MonoBehaviour {
 
     int instantiatedSquares = 0;
 
-    public GameObject squareToClone;
+    public Sprite[] sprites;
+    public GameObject squareToClone; 
 
 	void Start()
     {
@@ -30,8 +31,8 @@ public class SquareRain : MonoBehaviour {
                 x = Random.Range(-maxLenghtOfInstantiation, maxLenghtOfInstantiation);
             }
 
-            Instantiate(squareToClone, new Vector2(x, transform.position.y), Quaternion.identity);
-
+            GameObject go = (GameObject)Instantiate(squareToClone, new Vector2(x, transform.position.y), Quaternion.identity);
+            go.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 3)]; 
             lastRandomX = x;
 
             instantiatedSquares++;

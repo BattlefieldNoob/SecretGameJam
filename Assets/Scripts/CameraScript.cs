@@ -26,6 +26,7 @@ public class CameraScript : MonoBehaviour {
 
     IEnumerator Shake()
     {
+        GetComponent<AudioSource>().Play(); 
         shaking = true; 
         float elapsed = 0.0f;
 

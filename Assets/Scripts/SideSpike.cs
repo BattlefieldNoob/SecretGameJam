@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SideSpike : MonoBehaviour {
 
-	public Sprite spike;
+	public Sprite[] spikeSp;
 
 	Spike[] spikes;
 	public bool goUp;
@@ -14,7 +14,7 @@ public class SideSpike : MonoBehaviour {
 		spikes=GetComponentsInChildren<Spike>();
 		SpriteRenderer[] renderer=GetComponentsInChildren<SpriteRenderer>();
 		foreach(SpriteRenderer sr in renderer){
-			sr.sprite=spike;
+			sr.sprite=spikeSp[Random.Range(0, 3)];
 		}
 		StartCoroutine(Spikes());
 	}

@@ -93,7 +93,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         dead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
-       
+
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactory(Clone)"));
 
@@ -103,22 +103,27 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         if (!sinking)
         {
-            transform.Translate(-transform.position.normalized * sinkingSpeed);
-            if (Vector2.Distance(transform.position, Vector2.zero) <= 3)
-            {
-                GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero;
-                sinking = true;
-            }
+            GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero;
+            StartCoroutine(WaitAndSink()); 
         }
         if (sinking && !stopped)
         {
             transform.Translate(new Vector3(0, -1, 0) * sinkingSpeed);
-            if (Vector2.Distance(transform.position, GameObject.Find("Paperella").transform.position) < 10)
+            //transform.position = new Vector3( transform.position.x +  Mathf.Sin(Time.time * speed),transform.position.y,transform.position.z);
+            //if (Vector2.Distance(transform.position, GameObject.Find("Paperella").transform.position) < 10)
+            if(transform.position.y <= GameObject.Find("Paperella").transform.position.y)
             {
                 stopped = true;
                 GetComponentInParent<BossAi>().SendMessage("PyramidDeath");
             }
         }
+    }
+
+    IEnumerator WaitAndSink()
+    {
+        
+        yield return new WaitForSeconds(1.5f); 
+        sinking = true;
     }
 
     public float getHP()

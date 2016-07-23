@@ -37,6 +37,7 @@ public class PlayerLife : MonoBehaviour
 
     void Damage()
     {
+        GetComponent<AudioSource>().Play(); 
         damaged = true; 
         hp--;
         if (hp <= 0)
