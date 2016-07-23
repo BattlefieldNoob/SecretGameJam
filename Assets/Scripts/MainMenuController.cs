@@ -18,4 +18,14 @@ public class MainMenuController : MonoBehaviour {
     {
         SceneManager.LoadScene(1);
     }
+
+    public void OnTutorial()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void OnCredits()
+    {
+
+    }
 }

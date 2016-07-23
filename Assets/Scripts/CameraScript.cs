@@ -6,7 +6,9 @@ public class CameraScript : MonoBehaviour {
     public float duration;
     public float magnitude;
     bool shaking = false;
-
+    bool canShake = true;
+    float count;
+    
 	// Use this for initialization
 	void Start () {
 	
@@ -14,13 +16,20 @@ public class CameraScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.S))
-            StartShaking(); 
+        if (!canShake)
+        {
+            count += Time.deltaTime; 
+            if(count>=4)
+            {
+                canShake = true;
+                count = 0; 
+            }
+        }
 	}
 
     public void StartShaking()
     {
-        if(!shaking)
+        if(!shaking && canShake)
             StartCoroutine(Shake());
     }
 
@@ -53,5 +62,6 @@ public class CameraScript : MonoBehaviour {
         
         Camera.main.transform.position = originalCamPos;
         shaking = false;
+        canShake = false;
     }
 }

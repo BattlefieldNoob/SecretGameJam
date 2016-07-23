@@ -90,6 +90,7 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     public void Damage()
     {
         hp--;
+        transform.parent.gameObject.SendMessage("Damage");
         if (hp == 0)
         {
             Death();

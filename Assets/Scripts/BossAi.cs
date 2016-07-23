@@ -36,9 +36,10 @@ public class BossAi : MonoBehaviour {
 
     public void Damage()
     {
-        current.SendMessage("Damage");
-        audio.clip = hitClips[Random.Range(0,4)];
-        audio.Play(); 
+        audio.clip = hitClips[Random.Range(0, 3)];
+        audio.Play();
+        //current.SendMessage("Damage");
+       
     }
 
 
