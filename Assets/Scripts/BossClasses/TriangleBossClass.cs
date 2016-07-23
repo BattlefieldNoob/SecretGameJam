@@ -18,6 +18,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     public float risingSpeed = 7;
     bool rising = true;
     public bool stopped = false;
+    GameController gc; 
 
 
     public GameObject attaccoPunte;
@@ -28,6 +29,8 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         print("waiting for cooldown");
         player = GameObject.Find("Player");
         maximum = hp;
+        gc = GameObject.Find("GameController").GetComponent<GameController>();
+        gc.lastBossEncountered = "Pyramid"; 
     }
 
     // Update is called once per frame
@@ -97,7 +100,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         dead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
-
+        gc = GameObject.Find("GameController").GetComponent<GameController>();
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactory(Clone)"));
 

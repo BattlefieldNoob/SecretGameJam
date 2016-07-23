@@ -8,7 +8,9 @@ public class GameController : MonoBehaviour {
     public bool gameOver = false; 
     public GameObject pauseCanvas;
     public GameObject inGameCanvas;
-    public string lastBossEncountered; 
+    public string lastBossEncountered;
+    public GameObject gameOverObject;
+    public GameObject player; 
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +36,7 @@ public class GameController : MonoBehaviour {
 
     void SwitchPause()
     {
-        if (!isPause)
+        if (!isPause && !gameOver)
         {
             Time.timeScale = 0;
             print("Pause");
@@ -62,8 +64,19 @@ public class GameController : MonoBehaviour {
         print("Congratulations");
     }
 
+    public void Retry()
+    {
+        Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+        if (lastBossEncountered == "Pyramid")
+        {
+            GameObject.Find("Boss").SendMessage("RetryPyramid");
+            Instantiate(player, new Vector3(0,0,0), Quaternion.identity); 
+        }
+    }
+
     public void GameOver()
     {
-
+        gameOver = true;
+        gameOverObject.SetActive(true); 
     }
 }

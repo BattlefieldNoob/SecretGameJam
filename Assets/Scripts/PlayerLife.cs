@@ -9,7 +9,8 @@ public class PlayerLife : MonoBehaviour
     float counter = 0;
     public float maxHP; 
     public float invincibilityTime = 2.5f;
-    public HealthBarScript playerHealth; 
+    public HealthBarScript playerHealth;
+    public GameObject gameOver; 
 
     // Use this for initialization
     void Start()
@@ -48,6 +49,7 @@ public class PlayerLife : MonoBehaviour
     void Death()
     {
         playerHealth.Value = hp;
+        GameObject.Find("GameController").SendMessage("GameOver");
         Destroy(gameObject);
     }
 
