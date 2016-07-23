@@ -32,12 +32,4 @@ public class WallSquare : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.gameObject.GetComponent<Bullet>())
-        {
-            Destroy(coll.gameObject);
-            Destroy(gameObject);
-        }
-    }
 }

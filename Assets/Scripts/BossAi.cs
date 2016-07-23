@@ -57,6 +57,11 @@ public class BossAi : MonoBehaviour {
         currentClass = Classes.Triangle;
     }
 
+    public void CubeDeath()
+    {
+
+    }
+
     void SwitchClass()
     {
         switch (currentClass)

@@ -9,27 +9,26 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     public float attackCooldown = 10f;
 
     float wallCooldownCounter = 5f;
-    bool rising = true; 
+    bool rising = true;
     public float risingSpeed;
     GameObject player;
     bool dead;
     bool enraged;
-    bool sinking; 
-    public float speed; 
+    bool sinking;
+    public float speed;
 
     public float attackHeightInstantiation;
 
     public GameObject attaccoCubi;
     public GameObject cubiDifesa;
     bool stopped;
-    public float sinkingSpeed; 
+    public float sinkingSpeed;
     public float hp = 100;
     public float maximum;
 
     // Use this for initialization
     void Start()
     {
-        wallCooldownCounter = UnityEngine.Random.Range(15f, 25f);//counter random per il muro
         player = GameObject.Find("Player");
         maximum = hp;
     }
@@ -53,7 +52,7 @@ public class SquareBossClass : MonoBehaviour, IBossClass
 
         if (!dead && !rising)
         {
-            //GetComponentInParent<Rigidbody2D>().AddForce((-player.transform.position + transform.position).normalized * speed);
+            GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
             attackCooldownCounter -= Time.deltaTime;
             wallCooldownCounter -= Time.deltaTime;
             if (attackCooldownCounter <= 0)
@@ -61,18 +60,14 @@ public class SquareBossClass : MonoBehaviour, IBossClass
                 Attack();
                 attackCooldownCounter = attackCooldown; //reset cooldown counter
             }
-            if (wallCooldownCounter <= 0)
-            {
-                MakeWallLikeTrump();
-                wallCooldownCounter = UnityEngine.Random.Range(15f, 25f); //reset cooldown counter
-            }
+
         }
         else if (!rising)
         {
             GoDown();
         }
 
-      
+
     }
 
     public void Attack()
@@ -86,12 +81,9 @@ public class SquareBossClass : MonoBehaviour, IBossClass
         if (!GameObject.Find("CubeWallFactory"))//se non esiste nessun pezzo di muro 
         {
             print("MAKE AMERICA GREAT AGAIN!");
-            GameObject boss = GameObject.FindGameObjectWithTag("Boss");
-            if (boss.GetComponent<BossAi>().currentState != BossAi.States.Frozen)
-            {
-                boss.GetComponent<BossAi>().currentState = BossAi.States.Frozen;
-                Instantiate(cubiDifesa, boss.transform.position, Quaternion.identity);
-            }
+
+            Instantiate(cubiDifesa, transform.position, Quaternion.identity);
+
         }
     }
 
@@ -112,9 +104,9 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     {
         print("ENRAGED!!!!");
         enraged = true;
-        speed *= 2f;
+        MakeWallLikeTrump();
         attackCooldown = 5;
-        GetComponentInChildren<SpriteRenderer>().color = Color.red;
+
     }
 
     void Death()
@@ -122,7 +114,8 @@ public class SquareBossClass : MonoBehaviour, IBossClass
         dead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
-
+        Destroy(GameObject.Find("Shield(Clone)"));
+        Destroy(GameObject.Find("SquareRainFactory(Clone)"));
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
 
 

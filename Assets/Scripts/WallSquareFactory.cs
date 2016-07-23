@@ -11,7 +11,7 @@ public class WallSquareFactory : MonoBehaviour {
 	void Start () {
         wallSquares = GetComponentsInChildren<WallSquare>();
         int i = 0;
-        bossTransform = GameObject.FindGameObjectWithTag("Boss").transform;
+        bossTransform = GameObject.Find("bossSquare").transform;
         foreach (WallSquare square in wallSquares)
         {
             square.correctPosition = square.transform.position;//salvo la posizione corretta per ogni quadrato
@@ -20,7 +20,7 @@ public class WallSquareFactory : MonoBehaviour {
             square.transform.position = hiddenPosition+new Vector2(i++*30,0);
         }
         
-        StartCoroutine(CleanArray());
+        //StartCoroutine(CleanArray());
 	}
 	
 	// Update is called once per frame
@@ -35,7 +35,7 @@ public class WallSquareFactory : MonoBehaviour {
             wallSquares = GetComponentsInChildren<WallSquare>();//ottengo i pezzi di muro restanti
             yield return new WaitForSeconds(0.5f);
         }
-        bossTransform.GetComponent<BossAi>().currentState = BossAi.States.Free;
+        bossTransform.gameObject.GetComponentInParent<BossAi>().currentState = BossAi.States.Free;
         Destroy(gameObject);
     }
 }
