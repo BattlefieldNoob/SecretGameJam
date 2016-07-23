@@ -5,15 +5,16 @@ public class Gun : MonoBehaviour {
 
     public GameObject gun;
     public float shootFrequency = 0.5f;
-    float counter; 
+    float counter;
 
+    public bool canShoot = true;
 	// Update is called once per frame
 	void Update () {
         counter += Time.deltaTime; 
         if (counter>=shootFrequency )
         {
             //   print("wewe"); 
-            if (Time.timeScale > 0)
+            if (Time.timeScale > 0 && canShoot)
             {
                 if (Input.GetMouseButton(1) || Input.GetButton("Fire3"))
                 {

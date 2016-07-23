@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour {
 
     enum States { CONTROLS, HOOKER, SHOOT , BOSS, END}
 
-    public BossAi boss;
+    public FakeBossAi boss;
 
     States current = States.CONTROLS;
 
@@ -34,6 +35,7 @@ public class TutorialController : MonoBehaviour {
         }
         Time.timeScale = 0;
         StartCoroutine(Tutorial());
+        boss.end += () => { print("fine"); current = States.END; switchTutorialMessages(current); };
         boss.gameObject.SetActive(false);
         hookAttack.canShoot = false;
         gunAttack.canShoot = false;
@@ -152,6 +154,11 @@ public class TutorialController : MonoBehaviour {
                     panels[3].gameObject.SetActive(true);
                 }
                 break;
+            case States.END:
+                {
+                    panels[4].gameObject.SetActive(true);
+                }
+                break;
         }
     }
 
@@ -162,5 +169,15 @@ public class TutorialController : MonoBehaviour {
         {
             panels[i].gameObject.SetActive(false);
         }
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(2);
     }
 }

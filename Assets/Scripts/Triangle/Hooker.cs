@@ -5,11 +5,13 @@ public class Hooker : MonoBehaviour {
     private bool inAir = false;
     public int speed = 100;
     Vector2 direction = Vector2.zero;
-    GameObject hookInstance; 
+    GameObject hookInstance;
+
+    public bool canShoot = true;
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.timeScale > 0)
+        if (Time.timeScale > 0 && canShoot)
         {
             if (Input.GetMouseButton(0) || Input.GetButton("Fire2"))
             {
