@@ -16,7 +16,8 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     bool sinking = false;
     public float sinkingSpeed = 10;
     public float risingSpeed = 7;
-    bool rising = true; 
+    bool rising = true;
+    public bool stopped = false;
 
 
     public GameObject attaccoPunte;
@@ -34,14 +35,14 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         if (rising)
         {
-            transform.Translate(new Vector3(0, 1, 0)  * risingSpeed);
+            transform.Translate(new Vector3(0, 1, 0) * risingSpeed);
             GameObject.FindGameObjectWithTag("MainCamera").SendMessage("StartShaking");
             if (Vector2.Distance(Vector2.zero, transform.position) < 3)
             {
                 rising = false;
-                GetComponent<Collider2D>().enabled = true; 
+                GetComponent<Collider2D>().enabled = true;
             }
-                
+
         }
         if (!dead && !rising)
         {
@@ -53,7 +54,7 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
                 attackCooldownCounter = attackCooldown;//reset cooldown counter
             }
         }
-        else if(!rising)
+        else if (!rising)
         {
             GoDown();
         }
@@ -92,8 +93,10 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         dead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
+       
+        player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactory(Clone)"));
-        //GetComponentInParent<BossAi>().SendMessage("SwitchClass");
+
     }
 
     void GoDown()
@@ -103,17 +106,20 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
             transform.Translate(-transform.position.normalized * sinkingSpeed);
             if (Vector2.Distance(transform.position, Vector2.zero) <= 3)
             {
-                GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero; 
-                sinking = true;   
+                GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero;
+                sinking = true;
             }
         }
-        if (sinking)
+        if (sinking && !stopped)
         {
             transform.Translate(new Vector3(0, -1, 0) * sinkingSpeed);
+            if (Vector2.Distance(transform.position, GameObject.Find("Paperella").transform.position) < 10)
+            {
+                stopped = true;
+                GetComponentInParent<BossAi>().SendMessage("PyramidDeath");
+            }
         }
     }
-
-    
 
     public float getHP()
     {

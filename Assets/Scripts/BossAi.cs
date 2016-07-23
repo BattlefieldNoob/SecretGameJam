@@ -37,6 +37,26 @@ public class BossAi : MonoBehaviour {
     }
 
 
+    public void PyramidDeath()
+    {
+        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(false);
+        current = transform.GetChild(1).gameObject;
+        current.transform.position = new Vector3(0, current.transform.position.y, 0);
+        healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        currentClass = Classes.Triangle;
+    }
+
+    public void OctahedronDeath()
+    {
+        transform.GetChild(2).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(false);
+        current = transform.GetChild(2).gameObject;
+        current.transform.position = new Vector3(0, current.transform.position.y, 0);
+        healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        currentClass = Classes.Triangle;
+    }
+
     void SwitchClass()
     {
         switch (currentClass)

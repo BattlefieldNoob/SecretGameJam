@@ -7,13 +7,15 @@ public class PlayerLife : MonoBehaviour
     public float hp = 30;
     public bool damaged = false;
     float counter = 0;
+    public float maxHP; 
     public float invincibilityTime = 2.5f;
     public HealthBarScript playerHealth; 
 
     // Use this for initialization
     void Start()
     {
-        playerHealth.MaxValue = hp; 
+        playerHealth.MaxValue = hp;
+        maxHP = hp; 
     }
 
     // Update is called once per frame
