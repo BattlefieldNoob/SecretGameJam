@@ -4,15 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-    bool isPause = false;
-
+    public bool isPause = false;
+    public bool gameOver = false; 
     public GameObject pauseCanvas;
     public GameObject inGameCanvas;
-
+    public string lastBossEncountered; 
 
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 1;
+        lastBossEncountered = null;
+        isPause = false;
+        gameOver = false; 
     }
 	
 	// Update is called once per frame
@@ -57,5 +60,10 @@ public class GameController : MonoBehaviour {
     public void FirstBossCleared()
     {
         print("Congratulations");
+    }
+
+    public void GameOver()
+    {
+
     }
 }
