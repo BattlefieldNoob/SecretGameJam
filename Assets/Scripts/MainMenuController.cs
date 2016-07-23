@@ -26,6 +26,11 @@ public class MainMenuController : MonoBehaviour {
 
     public void OnCredits()
     {
+        SceneManager.LoadScene(3);
+    }
 
+    public void OnBack()
+    {
+        SceneManager.LoadScene(0);
     }
 }
