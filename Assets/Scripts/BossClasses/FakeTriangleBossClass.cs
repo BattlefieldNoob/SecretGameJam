@@ -33,30 +33,33 @@ public class FakeTriangleBossClass : MonoBehaviour, IBossClass
     // Update is called once per frame
     void Update()
     {
-        if (rising)
+        if (Time.timeScale != 0)
         {
-            transform.Translate(new Vector3(0, 1, 0) * risingSpeed);
-            GameObject.FindGameObjectWithTag("MainCamera").SendMessage("StartShaking");
-            if (Vector2.Distance(Vector2.zero, transform.position) < 3)
+            if (rising)
             {
-                rising = false;
-                GetComponent<Collider2D>().enabled = true;
-            }
+                transform.Translate(new Vector3(0, 1, 0) * risingSpeed);
+                GameObject.FindGameObjectWithTag("MainCamera").SendMessage("StartShaking");
+                if (Vector2.Distance(Vector2.zero, transform.position) < 3)
+                {
+                    rising = false;
+                    GetComponent<Collider2D>().enabled = true;
+                }
 
-        }
-        if (!dead && !rising)
-        {
-            GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
-            attackCooldownCounter -= Time.deltaTime;
-            if (attackCooldownCounter <= 0)
-            {
-                Attack();
-                attackCooldownCounter = attackCooldown;//reset cooldown counter
             }
-        }
-        else if (!rising)
-        {
-            GoDown();
+            if (!dead && !rising)
+            {
+                GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
+                attackCooldownCounter -= Time.deltaTime;
+                if (attackCooldownCounter <= 0)
+                {
+                    Attack();
+                    attackCooldownCounter = attackCooldown;//reset cooldown counter
+                }
+            }
+            else if (!rising)
+            {
+                GoDown();
+            }
         }
     }
 

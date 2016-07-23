@@ -18,14 +18,16 @@ public class Hook : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        lr.SetPosition(0, player.transform.position);
-        lr.SetPosition(1, transform.position);
-        if (hooked)
+        if (Time.timeScale != 0)
         {
-            player.GetComponent<Rigidbody2D>().AddForce(dir.normalized * speed);
-        }
-       
-           
+            lr.SetPosition(0, player.transform.position);
+            lr.SetPosition(1, transform.position);
+            if (hooked)
+            {
+                player.GetComponent<Rigidbody2D>().AddForce(dir.normalized * speed);
+            }
+
+        } 
         
 	}
 
