@@ -12,7 +12,9 @@ public class BossAi : MonoBehaviour {
     GameObject current;
 
     public HealthBarScript healthBar;
-	// Use this for initialization
+    AudioSource audio;
+    public AudioClip[] hitClips; 
+	 // Use this for initialization
 	void Start () {
         //StartCoroutine(AIMovementLoop());
         //attivo in modo scriptato la classe "Square"
@@ -20,6 +22,7 @@ public class BossAi : MonoBehaviour {
         current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
         healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        audio = GetComponent<AudioSource>(); 
     }
 
     void Update()
@@ -34,6 +37,8 @@ public class BossAi : MonoBehaviour {
     public void Damage()
     {
         current.SendMessage("Damage");
+        audio.clip = hitClips[Random.Range(0,4)];
+        audio.Play(); 
     }
 
 
