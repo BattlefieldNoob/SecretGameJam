@@ -15,7 +15,7 @@ public class HealthBarScript : MonoBehaviour {
     [SerializeField]
     private Text valueText;
 
-    public float MaxValue { get; set; }
+    public float MaxValue;
 
     public float Value
     {

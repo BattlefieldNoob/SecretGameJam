@@ -59,8 +59,8 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     {
         print("ENRAGED!!!!"); 
         enraged = true;
-        speed *= 1.5f;
-        attackCooldown = 6;
+        speed *= 2f;
+        attackCooldown = 5;
         GetComponentInChildren<SpriteRenderer>().color = Color.red; 
     }
 

@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
     int nextState = 0;
     public GameObject[] forms;
     public float speed;
+    public PlayerLife healthStatus;
 
 
 
@@ -28,25 +29,17 @@ public class PlayerControl : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(Input.GetAxis("Horizontal"), 0) * speed);
 
-            //if(Input.GetMouseButtonDown(0) )
-            //      {
-            //	current.SendMessage("Attack1");
-            //}
-            //      else if (Input.GetMouseButtonDown(1))
-            //      {
-            //          Destroy(GameObject.Find("Hook(Clone)"));
-            //          currentIndex = nextState;
-            //	//switch state 
-            //	nextState = currentIndex+1;
-            //	print(nextState);
-            //          if (nextState == forms.Length)
-            //              nextState = 0; 
-            //	print("next Position:"+currentIndex);
-            //          forms[currentIndex].SetActive(false);
-            //          forms[nextState].SetActive(true);
-            //          current = forms[nextState];
-            //          print("switched state");
-            //}
+            if (healthStatus.damaged)
+                ShowDamages();
+            else
+            {
+                SpriteRenderer spRend = current.GetComponent<SpriteRenderer>();
+                Color col = spRend.color;
+                col.a = 1f;
+                spRend.color = col;
+            }
+
+
 
             //triangle
             if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire2"))
@@ -65,6 +58,19 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ShowDamages()
+    {
+
+        SpriteRenderer spRend = current.GetComponent<SpriteRenderer>();
+
+        Color col = spRend.color;
+        if (col.a == 1)
+            col.a = 0f;
+        else
+            col.a = 1f;
+        spRend.color = col;
     }
 
     void SwitchState()

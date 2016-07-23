@@ -19,7 +19,7 @@ public class BossAi : MonoBehaviour {
         transform.GetChild(1).gameObject.SetActive(false);
         current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
-        healthBar.MaxValue = 100f;
+        healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
     }
 
     void Update()
@@ -47,6 +47,7 @@ public class BossAi : MonoBehaviour {
                     transform.GetChild(1).gameObject.SetActive(true);
                     transform.GetChild(0).gameObject.SetActive(false);
                     current = transform.GetChild(1).gameObject;
+                    healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
                     currentClass = Classes.Triangle;
                 }
                 break;
@@ -56,6 +57,7 @@ public class BossAi : MonoBehaviour {
                     transform.GetChild(1).gameObject.SetActive(false);
                     transform.GetChild(0).gameObject.SetActive(true);
                     current = transform.GetChild(0).gameObject;
+                    healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
                     currentClass = Classes.Square;
                 }
                 break;
