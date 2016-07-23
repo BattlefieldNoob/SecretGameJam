@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -11,8 +12,8 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        Time.timeScale = 1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour {
 
     public void ExitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0); 
     }
 
     public void FirstBossCleared()
