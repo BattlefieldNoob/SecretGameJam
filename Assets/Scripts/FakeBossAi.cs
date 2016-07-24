@@ -13,6 +13,9 @@ public class FakeBossAi : MonoBehaviour {
 
     public HealthBarScript healthBar;
 
+    AudioSource audio;
+    public AudioClip[] hitClips;
+
     public delegate void endTutorial();
 
     public event endTutorial end;
@@ -25,11 +28,13 @@ public class FakeBossAi : MonoBehaviour {
         current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
         healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        audio = GetComponent<AudioSource>();
     }
 
     public void Damage()
     {
-        current.SendMessage("Damage");
+        audio.clip = hitClips[Random.Range(0, 3)];
+        audio.Play();
     }
 
     void Update()

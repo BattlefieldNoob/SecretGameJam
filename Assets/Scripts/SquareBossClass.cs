@@ -26,6 +26,9 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     public float hp = 100;
     public float maximum;
 
+    public AudioSource bossRageAndDeath;
+
+    public AudioClip enragedSound, deathSound;
     // Use this for initialization
     void Start()
     {
@@ -78,11 +81,10 @@ public class SquareBossClass : MonoBehaviour, IBossClass
         Instantiate(attaccoCubi, new Vector2(0, attackHeightInstantiation), Quaternion.identity);
     }
 
-    public void MakeWallLikeTrump()
+    public void MakeWall()
     {
         if (!GameObject.Find("CubeWallFactory"))//se non esiste nessun pezzo di muro 
         {
-            print("MAKE AMERICA GREAT AGAIN!");
 
             Instantiate(cubiDifesa, transform.position, Quaternion.identity);
 
@@ -107,9 +109,11 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     {
         print("ENRAGED!!!!");
         enraged = true;
-        MakeWallLikeTrump();
+        MakeWall();
         attackCooldown = 5;
-
+        bossRageAndDeath.clip = enragedSound;
+        bossRageAndDeath.loop = true;
+        bossRageAndDeath.Play();
     }
 
     void Death()
@@ -120,7 +124,10 @@ public class SquareBossClass : MonoBehaviour, IBossClass
         Destroy(GameObject.Find("Shield(Clone)"));
         Destroy(GameObject.Find("SquareRainFactory(Clone)"));
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
-
+        bossRageAndDeath.Stop();
+        bossRageAndDeath.clip = deathSound;
+        bossRageAndDeath.loop = false;
+        bossRageAndDeath.Play();
 
     }
 

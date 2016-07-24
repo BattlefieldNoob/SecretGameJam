@@ -10,6 +10,8 @@ public class SideSpike : MonoBehaviour {
 
 	public float shiftDistance;
 
+    public AudioClip[] pikeSounds;
+
     AudioSource sounds;
 
 	void Start () {
@@ -29,6 +31,7 @@ public class SideSpike : MonoBehaviour {
 			{
 				spike.AnimateSpike(goUp);
 			}
+            sounds.clip = pikeSounds[Random.Range(0, pikeSounds.Length)];
             sounds.Play();
 			while(spikes[0].IsAnimating() || spikes[1].IsAnimating()){
 				yield return new WaitForEndOfFrame();
