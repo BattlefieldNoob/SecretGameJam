@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour {
             isPause = true;
             inGameCanvas.SetActive(false);
             pauseCanvas.SetActive(true);
+            GameObject.Find("ReturnToGame").GetComponent<Button>().Select(); 
         }
         else
         {
@@ -85,6 +86,7 @@ public class GameController : MonoBehaviour {
     public void GameOver()
     {
         gameOver = true;
-        gameOverObject.SetActive(true); 
+        gameOverObject.SetActive(true);
+        GameObject.Find("Retry").GetComponent<Button>().Select();
     }
 }
