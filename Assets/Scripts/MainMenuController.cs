@@ -62,8 +62,8 @@ public class MainMenuController : MonoBehaviour {
             soundTracks[1].Play();
             while (soundTracks[1].volume <= 0.9f)
             {
-                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.deltaTime * 1.5f);
-                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.deltaTime * 1.5f);
+                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.deltaTime * 2f);
+                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.deltaTime * 2f);
                 yield return new WaitForEndOfFrame();
             }
             soundTracks[1].volume = 1f;
@@ -71,11 +71,14 @@ public class MainMenuController : MonoBehaviour {
         }
         else if (scene == 0)
         {
-            soundTracks[0].Play();
+            if (!soundTracks[0].isPlaying) 
+                soundTracks[0].Play();
+            else
+                yield return new WaitForSeconds(audio.clip.length);
             while (soundTracks[0].volume <= 0.9f)
             {
-                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 0, Time.deltaTime * 1.5f);
-                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 1, Time.deltaTime * 1.5f);
+                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 0, Time.deltaTime * 2f);
+                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 1, Time.deltaTime * 2f);
                 yield return new WaitForEndOfFrame();
             }
             soundTracks[0].volume = 1f;
