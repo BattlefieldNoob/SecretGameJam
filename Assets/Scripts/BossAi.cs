@@ -20,13 +20,14 @@ public class BossAi : MonoBehaviour {
 	void Start () {
         //StartCoroutine(AIMovementLoop());
         //attivo in modo scriptato la classe "Square"
-        transform.GetChild(1).gameObject.SetActive(false);
-        current = transform.GetChild(0).gameObject;
-        currentClass = Classes.Square;
-        healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
-        audio = GetComponent<AudioSource>();
-        if (gameController == null)
-            gameController = GameObject.Find("GameController"); 
+        //transform.GetChild(1).gameObject.SetActive(false);
+        //current = transform.GetChild(0).gameObject;
+        //currentClass = Classes.Square;
+        //healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        //audio = GetComponent<AudioSource>();
+        //if (gameController == null)
+        //    gameController = GameObject.Find("GameController");
+        //print("CAZZO");
     }
 
     void Init(int child)
@@ -34,8 +35,8 @@ public class BossAi : MonoBehaviour {
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
         transform.GetChild(2).gameObject.SetActive(false);
+        transform.GetChild(child).gameObject.SetActive(true);
         current = transform.GetChild(child).gameObject;
-        current.SetActive(true);
         if (gameController == null)
             gameController = GameObject.Find("GameController");
         gameController.GetComponent<GameController>().bossType = child;

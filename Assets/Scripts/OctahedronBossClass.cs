@@ -32,13 +32,13 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
 
     public void Init()
     {
-        player = GameObject.Find("Player(Clone)");
         maximum = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         if (Time.timeScale != 0)
         {
             if (rising)
@@ -54,6 +54,7 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
             }
             if (!dead && !rising)
             {
+                
                 GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
                 attackCooldownCounter -= Time.deltaTime;
                 if (attackCooldownCounter <= 0)

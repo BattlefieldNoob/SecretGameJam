@@ -18,7 +18,8 @@ public class GameController : MonoBehaviour {
 	void Start () {
         Time.timeScale = 1;
         isPause = false;
-        gameOver = false; 
+        gameOver = false;
+        Retry();
     }
 	
 	// Update is called once per frame
@@ -69,9 +70,11 @@ public class GameController : MonoBehaviour {
     {
         Instantiate(player, new Vector3(-80.7f, 0, 0), Quaternion.identity);
         gameOverObject.SetActive(false);
-        Destroy(GameObject.Find("Boss"));
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Boss"))
+            Destroy(g);
         GameObject b =  Instantiate(currentBoss);
-        b.SendMessage("Init",bossType,0); 
+        b.SendMessage("Init",bossType,0);
+        gameOver = false; 
             
     }
 

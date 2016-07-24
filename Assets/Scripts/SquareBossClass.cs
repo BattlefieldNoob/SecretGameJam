@@ -36,7 +36,8 @@ public class SquareBossClass : MonoBehaviour, IBossClass
     // Update is called once per frame
     void Update()
     {
-
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
         if (Time.timeScale != 0)
         {
             if (rising)
