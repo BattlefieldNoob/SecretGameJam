@@ -32,6 +32,10 @@ public class FakeBossAi : MonoBehaviour {
         current.SendMessage("Damage");
     }
 
+    void Update()
+    {
+        healthBar.Value = current.GetComponent<IBossClass>().getHP();
+    }
 
     public void PyramidDeath()
     {

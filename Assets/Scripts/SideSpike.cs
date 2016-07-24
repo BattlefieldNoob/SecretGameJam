@@ -10,7 +10,10 @@ public class SideSpike : MonoBehaviour {
 
 	public float shiftDistance;
 
+    AudioSource sounds;
+
 	void Start () {
+        sounds = GetComponent<AudioSource>();
 		spikes=GetComponentsInChildren<Spike>();
 		SpriteRenderer[] renderer=GetComponentsInChildren<SpriteRenderer>();
 		foreach(SpriteRenderer sr in renderer){
@@ -26,6 +29,7 @@ public class SideSpike : MonoBehaviour {
 			{
 				spike.AnimateSpike(goUp);
 			}
+            sounds.Play();
 			while(spikes[0].IsAnimating() || spikes[1].IsAnimating()){
 				yield return new WaitForEndOfFrame();
 			}
