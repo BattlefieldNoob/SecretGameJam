@@ -6,16 +6,14 @@ public class MainMenuController : MonoBehaviour {
 
     public AudioSource audio;
 
-    public AudioClip[] clips; 
+    public AudioClip[] clips;
 
-	// Use this for initialization
-	void Start () {
-        if (GameObject.FindGameObjectsWithTag("Audio").Length>1)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-	}
+    AudioSource[] soundTracks;
+
+        // Use this for initialization
+    void Start () {
+       soundTracks = GameObject.Find("SoundTracks").GetComponents<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -59,7 +57,34 @@ public class MainMenuController : MonoBehaviour {
     {
         audio.clip = clips[1];
         audio.Play();
-        yield return new WaitForSeconds(audio.clip.length);
+        if (scene == 1)
+        {
+            soundTracks[1].Play();
+            while (soundTracks[1].volume <= 0.9f)
+            {
+                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.deltaTime * 1.5f);
+                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.deltaTime * 1.5f);
+                yield return new WaitForEndOfFrame();
+            }
+            soundTracks[1].volume = 1f;
+            soundTracks[0].Stop();
+        }
+        else if (scene == 0)
+        {
+            soundTracks[0].Play();
+            while (soundTracks[0].volume <= 0.9f)
+            {
+                soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 0, Time.deltaTime * 1.5f);
+                soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 1, Time.deltaTime * 1.5f);
+                yield return new WaitForEndOfFrame();
+            }
+            soundTracks[0].volume = 1f;
+            soundTracks[1].Stop();
+        }
+        else
+        {
+            yield return new WaitForSeconds(audio.clip.length);
+        }
         SceneManager.LoadScene(scene);
     }
 }

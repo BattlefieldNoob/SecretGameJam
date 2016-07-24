@@ -188,14 +188,15 @@ public class TutorialController : MonoBehaviour {
     IEnumerator MakeTransition()
     {
         yield return new WaitForSeconds(0.5f);
-        soundTracks[2].Play();
-        while (soundTracks[2].volume <= 0.9f)
+        soundTracks[1].Play();
+        while (soundTracks[1].volume <= 0.9f)
         {
-            soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 0, Time.deltaTime*1.5f);
-            soundTracks[2].volume = Mathf.Lerp(soundTracks[2].volume, 1, Time.deltaTime*1.5f);
+            soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.deltaTime * 1.5f);
+            soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.deltaTime * 1.5f);
             yield return new WaitForEndOfFrame();
         }
-        soundTracks[2].volume = 1f;
-        SceneManager.LoadScene(2);
+        soundTracks[1].volume = 1f;
+        soundTracks[0].Stop();
+        SceneManager.LoadScene(1);
     }
 }

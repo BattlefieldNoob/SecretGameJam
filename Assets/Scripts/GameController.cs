@@ -15,10 +15,14 @@ public class GameController : MonoBehaviour {
     public Button mockButton; 
     public int bossType = 0;
     public MainMenuController mainMenuController;
-    public GameObject TheVoid; 
+    public GameObject TheVoid;
 
+    AudioSource audio;
+
+    public AudioClip death;
 	// Use this for initialization
 	void Start () {
+        audio = GameObject.Find("MainMenuController").GetComponent<AudioSource>();
         Time.timeScale = 1;
         isPause = false;
         gameOver = false;
@@ -65,7 +69,7 @@ public class GameController : MonoBehaviour {
     public void ExitGame()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0); 
+        GameObject.Find("MainMenuController").GetComponent<MainMenuController>().OnBack();
     }
 
     public void FirstBossCleared()
@@ -92,6 +96,8 @@ public class GameController : MonoBehaviour {
         gameOver = true;
         gameOverObject.SetActive(true);
         GameObject.Find("Retry").GetComponent<Button>().Select();
+        audio.clip = death;
+        audio.Play();
     }
 
     public void TheEnd()
