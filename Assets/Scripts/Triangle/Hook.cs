@@ -28,11 +28,14 @@ public class Hook : MonoBehaviour {
         {
             if (player == null)
                 Destroy(lr);
-            lr.SetPosition(0, player.transform.position);
-            lr.SetPosition(1, transform.position);
-            if (hooked)
+            if (player != null)
             {
-                player.GetComponent<Rigidbody2D>().AddForce(dir.normalized * speed);
+                lr.SetPosition(0, player.transform.position);
+                lr.SetPosition(1, transform.position);
+                if (hooked)
+                {
+                    player.GetComponent<Rigidbody2D>().AddForce(dir.normalized * speed);
+                }
             }
 
         } 

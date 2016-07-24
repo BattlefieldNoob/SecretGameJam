@@ -57,7 +57,8 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
             {
                 if(player==null)
                     player = GameObject.Find("Player(Clone)");
-                GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
+                if (player != null)
+                    GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
                 attackCooldownCounter -= Time.deltaTime;
                 if (attackCooldownCounter <= 0)
                 {

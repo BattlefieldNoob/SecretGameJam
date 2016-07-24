@@ -35,4 +35,9 @@ public class Spike : MonoBehaviour {
 		animate=false;
 		yield break;
 	}
+
+    public void Damage()
+    {
+        //Do nothing
+    }
 }

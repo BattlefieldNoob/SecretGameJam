@@ -57,7 +57,8 @@ public class SquareBossClass : MonoBehaviour, IBossClass
 
             if (!dead && !rising)
             {
-                GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
+                if (player != null)
+                    GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
                 attackCooldownCounter -= Time.deltaTime;
                 wallCooldownCounter -= Time.deltaTime;
                 if (attackCooldownCounter <= 0)
