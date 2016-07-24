@@ -53,7 +53,8 @@ public class MainMenuController : MonoBehaviour {
 
     public IEnumerator OnClickSound(int scene)
     {
-        PlaySound(); 
+        audio.clip = clips[1];
+        audio.Play();
         yield return new WaitForSeconds(audio.clip.length);
         SceneManager.LoadScene(scene);
     }

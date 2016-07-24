@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour {
 
     public void ExitGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0); 
     }
 
@@ -73,7 +74,7 @@ public class GameController : MonoBehaviour {
 
     public void Retry()
     {
-        mainMenuController.PlaySound(); 
+        
         Instantiate(player, new Vector3(-80.7f, 0, 0), Quaternion.identity);
         gameOverObject.SetActive(false);
         foreach(GameObject g in GameObject.FindGameObjectsWithTag("Boss"))
