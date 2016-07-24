@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour {
     public GameObject currentBoss;
     public GameObject gameOverObject;
     public GameObject player;
+    public Button mockButton; 
     public int bossType = 0; 
 
 
@@ -53,6 +55,7 @@ public class GameController : MonoBehaviour {
             isPause = false;
             inGameCanvas.SetActive(true);
             pauseCanvas.SetActive(false);
+            mockButton.Select(); 
         }
     }
 
@@ -74,8 +77,9 @@ public class GameController : MonoBehaviour {
             Destroy(g);
         GameObject b =  Instantiate(currentBoss);
         b.SendMessage("Init",bossType,0);
-        gameOver = false; 
-            
+        gameOver = false;
+        mockButton.Select();
+
     }
 
     public void GameOver()

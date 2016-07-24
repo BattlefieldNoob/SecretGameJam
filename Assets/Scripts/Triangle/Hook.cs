@@ -20,6 +20,8 @@ public class Hook : MonoBehaviour {
 	void Update () {
         if (Time.timeScale != 0)
         {
+            if (player == null)
+                Destroy(lr);
             lr.SetPosition(0, player.transform.position);
             lr.SetPosition(1, transform.position);
             if (hooked)
