@@ -23,14 +23,14 @@ public class VoidScript : MonoBehaviour
     void Update()
     {
         counter += Time.deltaTime;
-        if (counter <= 10)
+        if (counter <= 17)
         {
             walls[0].transform.localScale += new Vector3(0, speed, 0);
             walls[1].transform.localScale += new Vector3(0, speed, 0);
             walls[2].transform.localScale += new Vector3(0, speed * 2, 0);
             walls[3].transform.localScale += new Vector3(0, speed * 2, 0);
         }
-        else
+        if (counter >= 13)
         {
             if (!done)
                 ShowFinalText();
