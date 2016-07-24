@@ -13,7 +13,9 @@ public class BossAi : MonoBehaviour {
 
     public HealthBarScript healthBar;
     AudioSource audio;
-    public AudioClip[] hitClips; 
+    public AudioClip[] hitClips;
+    public GameObject gameController;
+
 	 // Use this for initialization
 	void Start () {
         //StartCoroutine(AIMovementLoop());
@@ -22,7 +24,30 @@ public class BossAi : MonoBehaviour {
         current = transform.GetChild(0).gameObject;
         currentClass = Classes.Square;
         healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
-        audio = GetComponent<AudioSource>(); 
+        audio = GetComponent<AudioSource>();
+        if (gameController == null)
+            gameController = GameObject.Find("GameController"); 
+    }
+
+    void Init(int child)
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
+        current = transform.GetChild(child).gameObject;
+        current.SetActive(true);
+        if (gameController == null)
+            gameController = GameObject.Find("GameController");
+        gameController.GetComponent<GameController>().bossType = child;
+        current.SendMessage("Init");
+        currentClass = Classes.Square;
+        if(healthBar == null)
+        {
+            healthBar = GameObject.Find("HealthBarMask").GetComponent<HealthBarScript>(); 
+        }
+        healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
+        audio = GetComponent<AudioSource>();
+        
     }
 
     void Update()
@@ -48,7 +73,13 @@ public class BossAi : MonoBehaviour {
         transform.GetChild(1).gameObject.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(false);
         current = transform.GetChild(1).gameObject;
+        current.SendMessage("Init");
         current.transform.position = new Vector3(0, current.transform.position.y, 0);
+        if (gameController == null)
+            gameController = GameObject.Find("GameController");
+        gameController.GetComponent<GameController>().bossType = 1;
+        if (healthBar == null)
+            healthBar = GameObject.Find("HealthBarMask").GetComponent<HealthBarScript>();
         healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
         currentClass = Classes.Triangle;
     }
@@ -58,6 +89,9 @@ public class BossAi : MonoBehaviour {
         transform.GetChild(2).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
         current = transform.GetChild(2).gameObject;
+        if (gameController == null)
+            gameController = GameObject.Find("GameController");
+        gameController.GetComponent<GameController>().bossType = 2;
         current.transform.position = new Vector3(0, current.transform.position.y, 0);
         healthBar.MaxValue = current.GetComponent<IBossClass>().getHP();
         currentClass = Classes.Triangle;

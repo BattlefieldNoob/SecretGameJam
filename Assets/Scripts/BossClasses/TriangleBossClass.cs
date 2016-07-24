@@ -18,7 +18,6 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     public float risingSpeed = 7;
     bool rising = true;
     public bool stopped = false;
-    GameController gc; 
 
 
     public GameObject attaccoPunte;
@@ -26,11 +25,14 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     // Use this for initialization
     void Start()
     {
+        Init();
+    }
+
+    void Init()
+    {
         print("waiting for cooldown");
         player = GameObject.Find("Player");
         maximum = hp;
-        gc = GameObject.Find("GameController").GetComponent<GameController>();
-        gc.lastBossEncountered = "Pyramid"; 
     }
 
     // Update is called once per frame
@@ -51,6 +53,8 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
             }
             if (!dead && !rising)
             {
+                if(player==null)
+                    player = GameObject.Find("Player(Clone)");
                 GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
                 attackCooldownCounter -= Time.deltaTime;
                 if (attackCooldownCounter <= 0)
@@ -100,7 +104,6 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         dead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
-        gc = GameObject.Find("GameController").GetComponent<GameController>();
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactory(Clone)"));
 

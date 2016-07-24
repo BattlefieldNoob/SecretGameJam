@@ -15,6 +15,10 @@ public class PlayerLife : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (playerHealth == null)
+        {
+            playerHealth = GameObject.Find("PlayerHealthBar").GetComponent<HealthBarScript>();
+        }
         playerHealth.MaxValue = hp;
         maxHP = hp; 
     }

@@ -8,14 +8,15 @@ public class GameController : MonoBehaviour {
     public bool gameOver = false; 
     public GameObject pauseCanvas;
     public GameObject inGameCanvas;
-    public string lastBossEncountered;
+    public GameObject currentBoss;
     public GameObject gameOverObject;
-    public GameObject player; 
+    public GameObject player;
+    public int bossType = 0; 
+
 
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 1;
-        lastBossEncountered = null;
         isPause = false;
         gameOver = false; 
     }
@@ -66,12 +67,12 @@ public class GameController : MonoBehaviour {
 
     public void Retry()
     {
-        Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
-        if (lastBossEncountered == "Pyramid")
-        {
-            GameObject.Find("Boss").SendMessage("RetryPyramid");
-            Instantiate(player, new Vector3(0,0,0), Quaternion.identity); 
-        }
+        Instantiate(player, new Vector3(-80.7f, 0, 0), Quaternion.identity);
+        gameOverObject.SetActive(false);
+        Destroy(GameObject.Find("Boss"));
+        GameObject b =  Instantiate(currentBoss);
+        b.SendMessage("Init",bossType,0); 
+            
     }
 
     public void GameOver()

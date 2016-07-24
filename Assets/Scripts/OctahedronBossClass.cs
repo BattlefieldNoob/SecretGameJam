@@ -30,6 +30,12 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
         maximum = hp;
     }
 
+    public void Init()
+    {
+        player = GameObject.Find("Player(Clone)");
+        maximum = hp;
+    }
+
     // Update is called once per frame
     void Update()
     {
