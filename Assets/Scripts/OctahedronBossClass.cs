@@ -56,8 +56,8 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
             }
             if (!dead && !rising)
             {
-                
-                GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
+                if(player!=null)
+                    GetComponentInParent<Rigidbody2D>().AddForce((player.transform.position - transform.position).normalized * speed);
                 attackCooldownCounter -= Time.deltaTime;
                 if (attackCooldownCounter <= 0)
                 {

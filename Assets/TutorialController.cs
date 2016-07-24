@@ -26,9 +26,13 @@ public class TutorialController : MonoBehaviour {
 
     bool canProcessInputs = false;
 
+    AudioSource[] soundTracks;
+
     // Use this for initialization
     void Start () {
         panels = new GameObject[transform.childCount];
+
+        soundTracks=GameObject.Find("MainMenuController").GetComponents<AudioSource>();
         for(int i = 0; i < panels.Length; i++)
         {
             panels[i] = transform.GetChild(i).gameObject;
@@ -178,6 +182,20 @@ public class TutorialController : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(MakeTransition());   
+    }
+
+    IEnumerator MakeTransition()
+    {
+        yield return new WaitForSeconds(0.5f);
+        soundTracks[2].Play();
+        while (soundTracks[2].volume <= 0.9f)
+        {
+            soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 0, Time.deltaTime*1.5f);
+            soundTracks[2].volume = Mathf.Lerp(soundTracks[2].volume, 1, Time.deltaTime*1.5f);
+            yield return new WaitForEndOfFrame();
+        }
+        soundTracks[2].volume = 1f;
+        SceneManager.LoadScene(2);
     }
 }
