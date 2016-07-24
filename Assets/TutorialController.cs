@@ -101,7 +101,7 @@ public class TutorialController : MonoBehaviour {
         while (current != States.BOSS)
         {
             switchTutorialMessages(current);
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(3f);
             DisableAllPanels();
             Time.timeScale = 1;
             States last = current;
