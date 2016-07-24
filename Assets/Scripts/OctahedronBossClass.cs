@@ -19,13 +19,15 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
     bool rising = true;
     public bool stopped = false;
 
+    public AudioSource bossRageAndDeath;
+
+    public AudioClip enragedSound, deathSound;
 
     public GameObject attaccoPunte;
 
     // Use this for initialization
     void Start()
     {
-        print("waiting for cooldown");
         player = GameObject.Find("Player");
         maximum = hp;
     }
@@ -97,6 +99,9 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
         speed *= 2f;
         attackCooldown = 5;
         GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        bossRageAndDeath.clip = enragedSound;
+        bossRageAndDeath.loop = true;
+        bossRageAndDeath.Play();
     }
 
     void Death()
@@ -107,7 +112,10 @@ public class OctahedronBossClass : MonoBehaviour, IBossClass
 
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactoryOcta(Clone)"));
-
+        bossRageAndDeath.Stop();
+        bossRageAndDeath.clip = deathSound;
+        bossRageAndDeath.loop = false;
+        bossRageAndDeath.Play();
     }
 
     void GoDown()

@@ -19,6 +19,9 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
     bool rising = true;
     public bool stopped = false;
 
+    public AudioSource bossRageAndDeath;
+
+    public AudioClip enragedSound, deathSound;
 
     public GameObject attaccoPunte;
 
@@ -30,7 +33,6 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
 
     void Init()
     {
-        print("waiting for cooldown");
         player = GameObject.Find("Player");
         maximum = hp;
     }
@@ -97,6 +99,9 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         speed *= 2f;
         attackCooldown = 5;
         GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        bossRageAndDeath.clip = enragedSound;
+        bossRageAndDeath.loop = true;
+        bossRageAndDeath.Play();
     }
 
     void Death()
@@ -106,7 +111,10 @@ public class TriangleBossClass : MonoBehaviour, IBossClass
         GetComponentInChildren<SpriteRenderer>().color = Color.black;
         player.GetComponent<PlayerLife>().hp = player.GetComponent<PlayerLife>().maxHP;
         Destroy(GameObject.Find("SpikeFactory(Clone)"));
-
+        bossRageAndDeath.Stop();
+        bossRageAndDeath.clip = deathSound;
+        bossRageAndDeath.loop = false;
+        bossRageAndDeath.Play();
     }
 
     void GoDown()

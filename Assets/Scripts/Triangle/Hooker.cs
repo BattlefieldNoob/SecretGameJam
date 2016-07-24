@@ -8,6 +8,8 @@ public class Hooker : MonoBehaviour {
     GameObject hookInstance;
 
     public bool canShoot = true;
+
+    public AudioSource hookRelease;
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,7 +28,11 @@ public class Hooker : MonoBehaviour {
             else
             {
                 if (hookInstance != null)
+                {
+                    if (hookInstance.GetComponent<Hook>().hooked)
+                        hookRelease.Play();
                     Destroy(hookInstance);
+                }
                 direction = Vector2.zero;
             }
         }
