@@ -13,8 +13,8 @@ public class GameController : MonoBehaviour {
     public GameObject gameOverObject;
     public GameObject player;
     public Button mockButton; 
-    public int bossType = 0; 
-
+    public int bossType = 0;
+    public MainMenuController mainMenuController; 
 
 	// Use this for initialization
 	void Start () {
@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour {
         }
         else
         {
+            mainMenuController.PlaySound();
             Time.timeScale = 1;
             print("Running");
             isPause = false;
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour {
 
     public void Retry()
     {
+        mainMenuController.PlaySound(); 
         Instantiate(player, new Vector3(-80.7f, 0, 0), Quaternion.identity);
         gameOverObject.SetActive(false);
         foreach(GameObject g in GameObject.FindGameObjectsWithTag("Boss"))

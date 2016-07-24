@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
+    public AudioSource audio;
+
+    public AudioClip[] clips; 
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,23 +18,43 @@ public class MainMenuController : MonoBehaviour {
 	
 	}
 
-    public void OnStart()
+    public void OnStart()      
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(OnClickSound(1));
     }
 
     public void OnTutorial()
     {
-        SceneManager.LoadScene(2);
+        StartCoroutine(OnClickSound(2));
     }
 
     public void OnCredits()
     {
-        SceneManager.LoadScene(3);
+        StartCoroutine(OnClickSound(3));
     }
 
     public void OnBack()
     {
-        SceneManager.LoadScene(0);
+        StartCoroutine(OnClickSound(0));
+
+    }
+
+    public void PlaySound()
+    {
+        audio.clip = clips[1];
+        audio.Play();
+    }
+
+    public void OnHover()
+    {
+        audio.clip = clips[0];
+        audio.Play();
+    }
+
+    public IEnumerator OnClickSound(int scene)
+    {
+        PlaySound(); 
+        yield return new WaitForSeconds(audio.clip.length);
+        SceneManager.LoadScene(scene);
     }
 }
