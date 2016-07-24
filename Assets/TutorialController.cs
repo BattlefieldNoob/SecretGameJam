@@ -50,11 +50,11 @@ public class TutorialController : MonoBehaviour {
 
                 case States.CONTROLS://devo controllare se il giocatore ha premuto sia a che d
                     {
-                        if (Input.GetKeyDown(KeyCode.A))
+                        if (Input.GetKeyDown(KeyCode.A) || Input.GetAxis("Horizontal")<=-0.5)
                         {
                             aPressed = true;
                         }
-                        if (Input.GetKeyDown(KeyCode.D))
+                        if (Input.GetKeyDown(KeyCode.D) || Input.GetAxis("Horizontal") >=0.5)
                         {
                             dPressed = true;
                         }
@@ -67,7 +67,7 @@ public class TutorialController : MonoBehaviour {
                     break;
                 case States.HOOKER:
                     {
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire2"))
                         {
                             hookerPressed = true;
                         }
@@ -81,7 +81,7 @@ public class TutorialController : MonoBehaviour {
 
                 case States.SHOOT:
                     {
-                        if (Input.GetMouseButtonDown(1))
+                        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("Fire3"))
                         {
                             shootPressed = true;
                         }
