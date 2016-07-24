@@ -32,7 +32,7 @@ public class TutorialController : MonoBehaviour {
     void Start () {
         panels = new GameObject[transform.childCount];
 
-        soundTracks=GameObject.Find("MainMenuController").GetComponents<AudioSource>();
+        soundTracks=GameObject.Find("SoundTracks").GetComponents<AudioSource>();
         for(int i = 0; i < panels.Length; i++)
         {
             panels[i] = transform.GetChild(i).gameObject;
