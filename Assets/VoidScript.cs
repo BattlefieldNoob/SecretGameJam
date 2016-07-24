@@ -40,6 +40,7 @@ public class VoidScript : MonoBehaviour
 
     void ShowFinalText()
     {
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
         done = true;
         GameObject.Find("FinalText").SendMessage("DoIt");
     }
