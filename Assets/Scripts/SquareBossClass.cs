@@ -148,6 +148,7 @@ public class SquareBossClass : MonoBehaviour, IBossClass
             {
                 stopped = true;
                 GetComponentInParent<BossAi>().SendMessage("CubeDeath");
+                GameObject.Find("GameController").SendMessage("TheEnd"); 
             }
         }
     }

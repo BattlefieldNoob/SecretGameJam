@@ -14,7 +14,8 @@ public class GameController : MonoBehaviour {
     public GameObject player;
     public Button mockButton; 
     public int bossType = 0;
-    public MainMenuController mainMenuController; 
+    public MainMenuController mainMenuController;
+    public GameObject TheVoid; 
 
 	// Use this for initialization
 	void Start () {
@@ -91,5 +92,14 @@ public class GameController : MonoBehaviour {
         gameOver = true;
         gameOverObject.SetActive(true);
         GameObject.Find("Retry").GetComponent<Button>().Select();
+    }
+
+    public void TheEnd()
+    {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Boss"))
+            Destroy(g);
+        GameObject.Find("InGame").SetActive(false);
+        GameObject.Find("Crosshair").GetComponent<SpriteRenderer>().color = Color.black;
+        TheVoid.SetActive(true);
     }
 }
